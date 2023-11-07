@@ -1,12 +1,15 @@
-flutter_build_android: #Job name
-  stage: build # kind of job
+flutter_build_ios:
+  stage: build
   before_script:
     - flutter packages get
     - flutter clean
   script:
-     - flutter build apk
+    - flutter build ios
+    - cd ios
+    - xcodebuild clean archive -workspace Runner.xcworkspace -scheme Runner -archivePath RunnerArchive
+    - xcodebuild -exportArchive -archivePath RunnerArchive.xcarchive -exportOptionsPlist ExportOptions.plist -exportPath ./build
   artifacts:
     paths:
-      - build/app/outputs/apk/release/app-release.apk
+      - ios/build/Runner.ipa
   tags:
     - flutter
