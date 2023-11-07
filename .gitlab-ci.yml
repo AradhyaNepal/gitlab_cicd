@@ -6,7 +6,7 @@ stages:
 
 flutter_test:
   rules:
-  - if: '$CI_COMMIT_REF_NAME == "beta_test" && $CI_PIPELINE_SOURCE == "push"'
+  - if: '$CI_COMMIT_REF_NAME == "beta-test" && $CI_PIPELINE_SOURCE == "push"'
   stage: test
   script:
     - flutter test
@@ -15,7 +15,7 @@ flutter_test:
 
 flutter_analyse:
   rules:
-  - if: '$CI_COMMIT_REF_NAME == "beta_test" && $CI_PIPELINE_SOURCE == "push"'
+  - if: '$CI_COMMIT_REF_NAME == "beta-test" && $CI_PIPELINE_SOURCE == "push"'
   stage: analyse
   script:
     - analysis_output=$(flutter analyze)
@@ -30,7 +30,7 @@ flutter_analyse:
 
 flutter_build_android:
   rules:
-    - if: '$CI_COMMIT_REF_NAME == "beta_test" && $CI_PIPELINE_SOURCE == "push"'
+    - if: '$CI_COMMIT_REF_NAME == "beta-test" && $CI_PIPELINE_SOURCE == "push"'
   stage: build
   before_script:
     - flutter packages get
@@ -45,7 +45,7 @@ flutter_build_android:
 
 deploy_google_android:
   rules:
-    - if: '$CI_COMMIT_REF_NAME == "beta_test" && $CI_PIPELINE_SOURCE == "push"'
+    - if: '$CI_COMMIT_REF_NAME == "beta-test" && $CI_PIPELINE_SOURCE == "push"'
   stage: deploy
   before_script:
     - cd android
