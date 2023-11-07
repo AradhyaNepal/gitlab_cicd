@@ -28,7 +28,7 @@ flutter_analyse:
     - flutter
 
 
-futter_build_android:
+flutter_build_android:
   stage: build
   before_script:
     - flutter packages get
@@ -41,4 +41,14 @@ futter_build_android:
   tags:
     - flutter
 
-# Deploy to google drive
+deploy_google_android:
+  stage: deploy
+  before_script:
+    - cd android
+    - bundle install --deployment
+  dependencies:
+    - flutter_build_android
+  script:
+    - fastlane deploy_google_drive
+  tags:
+    - flutter
