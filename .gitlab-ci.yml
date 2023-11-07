@@ -49,7 +49,7 @@ deploy_google_android:
   stage: deploy
   before_script:
     - cd android
-    - bundle install --deployment
+    - fastlane add_plugin google_drive
   dependencies:
     - flutter_build_android
   script:
