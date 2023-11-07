@@ -5,7 +5,7 @@ stages:
 
 flutter_test:
   rules:
-  - if: '$CI_COMMIT_REF_NAME != "master" && $CI_PIPELINE_SOURCE == "push"'
+  - if: '$CI_COMMIT_REF_NAME != "beta_test" && $CI_PIPELINE_SOURCE == "push"'
   stage: test
   script:
     - flutter test
@@ -14,15 +14,14 @@ flutter_test:
 
 flutter_analyse:
   rules:
-  - if: '$CI_COMMIT_REF_NAME != "master" && $CI_PIPELINE_SOURCE == "push"'
+  - if: '$CI_COMMIT_REF_NAME != "beta_test" && $CI_PIPELINE_SOURCE == "push"'
   stage: analyse
   script:
-    - metrics lib -r codeclimate  > gl-code-quality-report.json
-    - |
-      report_lines="$(wc -l gl-code-quality-report.json | cut -f1 -d" ")"
+    - analysis_output=$(flutter analyze)
+      report_lines="$(echo "$analysis_output" | grep -oE '[0-9]+ issues found' | cut -d ' ' -f 1)"
       if [[ $report_lines -gt 10 ]]; then
           echo "more then 10 issues found"
-          exit 1  # fail the job
+          exit 1
       fi
   tags:
     - flutter
