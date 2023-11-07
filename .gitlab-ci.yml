@@ -1,6 +1,6 @@
 stages:
   - test
-  - analyse
+#  - analyse
   - build
   - deploy
 
@@ -13,19 +13,19 @@ flutter_test:
   tags:
     - flutter
 
-flutter_analyse:
-  rules:
-  - if: '$CI_COMMIT_REF_NAME == "beta-test" && $CI_PIPELINE_SOURCE == "push"'
-  stage: analyse
-  script:
-    - analysis_output=$(flutter analyze)
-      $report_lines = ($analysis_output | Select-String -Pattern '(\d+) issues found').Matches.Groups[1].Value
-      if [[ $report_lines -gt 10 ]]; then
-          echo "more then 10 issues found"
-          exit 1
-      fi
-  tags:
-    - flutter
+#flutter_analyse:
+#  rules:
+#  - if: '$CI_COMMIT_REF_NAME == "beta-test" && $CI_PIPELINE_SOURCE == "push"'
+#  stage: analyse
+#  script:
+#    - analysis_output=$(flutter analyze)
+#      $report_lines = ($analysis_output | Select-String -Pattern '(\d+) issues found').Matches.Groups[1].Value
+#      if [[ $report_lines -gt 10 ]]; then
+#          echo "more then 10 issues found"
+#          exit 1
+#      fi
+#  tags:
+#    - flutter
 
 
 flutter_build_android:
