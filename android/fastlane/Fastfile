@@ -19,7 +19,7 @@ platform :android do
   desc "Deploy a new version to the Google Drive"
   lane :deploy_google_drive do
     upload_to_google_drive(
-      drive_keyfile: 'drive_key.json',
+      drive_keyfile: 'android/fastlane/drive_key.json',
       service_account: true,
       folder_id: 'GitLabCICD',
       upload_files: ['build/app/outputs/apk/release/app-release.apk']
