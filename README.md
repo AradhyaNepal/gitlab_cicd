@@ -1,5 +1,4 @@
 # ci_cd_practice
-#Hello bello
 
 
 ## Getting started
