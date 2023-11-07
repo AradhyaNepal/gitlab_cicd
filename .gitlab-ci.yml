@@ -19,7 +19,7 @@ flutter_analyse:
   stage: analyse
   script:
     - analysis_output=$(flutter analyze)
-      report_lines="$(echo "$analysis_output" | grep -oE '[0-9]+ issues found' | cut -d ' ' -f 1)"
+      $report_lines = ($analysis_output | Select-String -Pattern '(\d+) issues found').Matches.Groups[1].Value
       if [[ $report_lines -gt 10 ]]; then
           echo "more then 10 issues found"
           exit 1
