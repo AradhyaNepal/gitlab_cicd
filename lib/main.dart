@@ -12,7 +12,15 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     print("Hello");
-    return MfaterialApp(
+    print("Hello");
+    print("Hello");
+    print("Hello");
+    print("Hello");
+    print("Hello");
+    print("Hello");
+    print("Hello");
+    print("Hello");
+    return MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
         // This is the theme of your application.
