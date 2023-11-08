@@ -18,7 +18,6 @@ default_platform(:android)
 platform :android do
   desc "Deploy a new version to the Google Drive"
   lane :deploy_google_drive do
-   sh "ls ../web -l"
    upload_to_google_drive(
       drive_keyfile: './fastlane/drive_key.json',
       service_account: true,
