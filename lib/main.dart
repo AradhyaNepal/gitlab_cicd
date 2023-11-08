@@ -16,11 +16,6 @@ class MyApp extends StatelessWidget {
     print("hello");
     print("hello");
     print("hello");
-    print("hello");
-    print("hello");
-    print("hello");
-    print("hello");
-    print("hello");
     return MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
