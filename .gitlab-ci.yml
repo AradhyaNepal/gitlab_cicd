@@ -39,7 +39,7 @@ flutter_build_android:
      - flutter build apk
   artifacts:
     paths:
-      - build/app-release.apk
+      - android/app-release.apk
   tags:
     - flutter
 

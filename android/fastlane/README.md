@@ -13,7 +13,6 @@ For _fastlane_ installation instructions, see [Installing _fastlane_](https://do
 
 # Available Actions
 
-
 ## Android
 
 ### android deploy_google_drive
