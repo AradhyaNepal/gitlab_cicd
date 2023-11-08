@@ -4,6 +4,7 @@ echo "Running flutter analyze..."
 analysis_output=$(flutter analyze)
 total_lines=$(echo "$analysis_output" | wc -l)
 # Two extra not our concern lines are printed on flutter analyze
+#Todo: This logic have error because on cicd there would be other messages too
 total_warning=$(($total_lines - 2))
 
 echo "Total Warnings: $total_warning"
