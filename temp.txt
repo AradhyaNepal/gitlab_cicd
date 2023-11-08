@@ -1,0 +1,16 @@
+Analyzing gitlab_cicd_practice...                               
+
+   info - Don't invoke 'print' in production code - lib\main.dart:14:5 - avoid_print
+  error - The method 'MfaterialApp' isn't defined for the type 'MyApp' - lib\main.dart:15:12 - undefined_method
+  error - The method 'MyHomePage' isn't defined for the type 'MyApp' - lib\main.dart:36:14 - undefined_method
+   info - Constructors for public widgets should have a named 'key' parameter - lib\main.dart:41:7 - use_key_in_widget_constructors
+  error - Getters, setters and methods can't be declared to be 'const' - lib\main.dart:42:3 - const_method
+   info - The variable name 'MyHomePage' isn't a lowerCamelCase identifier - lib\main.dart:42:9 - non_constant_identifier_names
+  error - 'MyHomePage' must have a method body because 'MyHomefPage' isn't abstract - lib\main.dart:42:9 - concrete_class_with_abstract_member
+  error - Super parameters can only be used in non-redirecting generative constructors - lib\main.dart:42:21 - invalid_super_formal_parameter_location
+  error - Initializing formal parameters can only be used in constructors - lib\main.dart:42:32 - field_initializer_outside_constructor
+  error - The final variable 'title' must be initialized - lib\main.dart:53:16 - final_not_initialized
+  error - The name 'MyHomePage' isn't a type, so it can't be used as a type argument - lib\main.dart:56:9 - non_type_as_type_argument
+  error - 'MyHomefPage.createState' ('State<dynamic> Function()') isn't a valid override of 'StatefulWidget.createState' ('State<StatefulWidget> Function()') - lib\main.dart:56:21 - invalid_override
+  error - The name 'MyHomePage' isn't a type, so it can't be used as a type argument - lib\main.dart:59:38 - non_type_as_type_argument
+
