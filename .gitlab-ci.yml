@@ -18,7 +18,7 @@ flutter_analyse:
   - if: '$CI_COMMIT_REF_NAME == "beta-test" && $CI_PIPELINE_SOURCE == "push"'
   stage: analyse
   script:
-    - ./analyse_script_to_test.sh
+    - sh ./analyse_script_to_test.sh
 
   tags:
     - flutter
