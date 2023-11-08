@@ -38,9 +38,8 @@ flutter_build_android:
   script:
      - flutter build apk
   artifacts:
-    paths:
-      - build/app-release.apk
-    expire_in: 1 days
+    reports:
+      dotenv: build\app\outputs\flutter-apk\app-release.apk
   tags:
     - flutter
 
@@ -48,10 +47,8 @@ deploy_google_android:
   rules:
     - if: '$CI_COMMIT_REF_NAME == "beta-test" && $CI_PIPELINE_SOURCE == "push"'
   stage: deploy
-  artifacts:
-    paths:
-      - build/app-release.apk
-  dependencies:
+
+  needs:
     - flutter_build_android
   script:
     - cd android
