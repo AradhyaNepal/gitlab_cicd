@@ -40,6 +40,7 @@ flutter_build_android:
   artifacts:
     paths:
       - build/app-release.apk
+    expire_in: 1 days
   tags:
     - flutter
 
