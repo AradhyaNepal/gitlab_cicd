@@ -16,6 +16,11 @@
 - Go to Gitlab commit you pushed on beta-test branch to see if its success
 - If on gitlab it shows success, go to https://drive.google.com/drive/folders/1Znd2NttLhNfVeKTw04vQp4D-f_SUEIeZ?usp=sharing drive to see whether new apk is uploaded
 
+## Codes Worth Watching:
+For uploading to google drive or playstore in future (CD): ./android/fastlane/Fastfile
+For 10 warning limit: ./analyse_script_to_test.sh
+For CI: ./.gitlab-ci.yml
+
 
 ## Reference
 - https://medium.com/@roger.tan/setup-a-flutter-ci-cd-with-gitlab-ci-part-1-8d40b7a3b3dc (All of his post on the CICD series)
