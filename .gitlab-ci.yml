@@ -18,12 +18,8 @@ flutter_analyse:
   - if: '$CI_COMMIT_REF_NAME == "beta-test" && $CI_PIPELINE_SOURCE == "push"'
   stage: analyse
   script:
-    - analysis_output=$(flutter analyze)
-      report_lines="$(echo "$analysis_output" | grep -oE '[0-9]+ issues found' | cut -d ' ' -f 1)"
-      if [[ $report_lines -gt 10 ]]; then
-          echo "more then 10 issues found"
-          exit 1
-      fi
+    - sh ./analyse_script_to_test.sh
+
   tags:
     - flutter
 
@@ -39,7 +35,7 @@ flutter_build_android:
      - flutter build apk
   artifacts:
     paths:
-      - build/app/outputs/apk/release/app-release.apk
+      - build\app\outputs\flutter-apk\app-release.apk
   tags:
     - flutter
 
@@ -47,12 +43,14 @@ deploy_google_android:
   rules:
     - if: '$CI_COMMIT_REF_NAME == "beta-test" && $CI_PIPELINE_SOURCE == "push"'
   stage: deploy
-  before_script:
-    - cd android
-    - bundle install --deployment
+
   dependencies:
     - flutter_build_android
   script:
-    - fastlane deploy_google_drive
+    - cd android
+    - touch fastlane/drive_key.json
+    - echo "$DRIVE_SECRET_VARIABLE" > fastlane/drive_key.json
+    - fastlane deploy_google_drive --verbose
   tags:
     - flutter
+
