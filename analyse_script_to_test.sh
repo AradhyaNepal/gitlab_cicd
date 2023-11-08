@@ -13,3 +13,5 @@ if [ "$total_warning" -gt 10 ]; then
     echo "More than 10 issues found. Terminating the workflow"
     exit 1
 fi
+
+exit 0
