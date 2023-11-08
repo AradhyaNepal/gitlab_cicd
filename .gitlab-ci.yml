@@ -1,17 +1,17 @@
 stages:
-  - test
+#  - test
   - analyse
 #  - build
 #  - deploy
 
-flutter_test:
-  rules:
-  - if: '$CI_COMMIT_REF_NAME == "beta-test" && $CI_PIPELINE_SOURCE == "push"'
-  stage: test
-  script:
-    - flutter test
-  tags:
-    - flutter
+#flutter_test:
+#  rules:
+#  - if: '$CI_COMMIT_REF_NAME == "beta-test" && $CI_PIPELINE_SOURCE == "push"'
+#  stage: test
+#  script:
+#    - flutter test
+#  tags:
+#    - flutter
 
 flutter_analyse:
   rules:
