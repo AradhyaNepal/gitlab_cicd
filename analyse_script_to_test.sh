@@ -3,7 +3,7 @@
 echo "Running flutter analyze..."
 flutter analyze > temp.txt
 total_lint=$(grep -c 'error - \|warning - \|hint - \|info - ' temp.txt)
-
+rm temp.txt
 echo "Total Lint: $total_lint"
 
 
