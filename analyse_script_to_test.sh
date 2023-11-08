@@ -1,7 +1,9 @@
 #!/bin/sh
 
 echo "Running flutter analyze..."
-flutter analyze >temp.txt
+echo "Running flutter analyze..."
+analysis_output=$(flutter analyze)
+echo "$analysis_output" > temp.txt
 total_warnings=$(grep -c 'warning: (.*)' temp.txt)
 echo "Total Warnings: $total_warnings"
 rm temp.txt
