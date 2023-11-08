@@ -1,8 +1,8 @@
 stages:
   - test
   - analyse
-  - build
-  - deploy
+#  - build
+#  - deploy
 
 flutter_test:
   rules:
@@ -24,33 +24,33 @@ flutter_analyse:
     - flutter
 
 
-flutter_build_android:
-  rules:
-    - if: '$CI_COMMIT_REF_NAME == "beta-test" && $CI_PIPELINE_SOURCE == "push"'
-  stage: build
-  before_script:
-    - flutter packages get
-    - flutter clean
-  script:
-     - flutter build apk
-  artifacts:
-    paths:
-      - build\app\outputs\flutter-apk\app-release.apk
-  tags:
-    - flutter
-
-deploy_google_android:
-  rules:
-    - if: '$CI_COMMIT_REF_NAME == "beta-test" && $CI_PIPELINE_SOURCE == "push"'
-  stage: deploy
-
-  dependencies:
-    - flutter_build_android
-  script:
-    - cd android
-    - touch fastlane/drive_key.json
-    - echo "$DRIVE_SECRET_VARIABLE" > fastlane/drive_key.json
-    - fastlane deploy_google_drive --verbose
-  tags:
-    - flutter
+#flutter_build_android:
+#  rules:
+#    - if: '$CI_COMMIT_REF_NAME == "beta-test" && $CI_PIPELINE_SOURCE == "push"'
+#  stage: build
+#  before_script:
+#    - flutter packages get
+#    - flutter clean
+#  script:
+#     - flutter build apk
+#  artifacts:
+#    paths:
+#      - build\app\outputs\flutter-apk\app-release.apk
+#  tags:
+#    - flutter
+#
+#deploy_google_android:
+#  rules:
+#    - if: '$CI_COMMIT_REF_NAME == "beta-test" && $CI_PIPELINE_SOURCE == "push"'
+#  stage: deploy
+#
+#  dependencies:
+#    - flutter_build_android
+#  script:
+#    - cd android
+#    - touch fastlane/drive_key.json
+#    - echo "$DRIVE_SECRET_VARIABLE" > fastlane/drive_key.json
+#    - fastlane deploy_google_drive --verbose
+#  tags:
+#    - flutter
 
