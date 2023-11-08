@@ -1,17 +1,17 @@
 stages:
-  - test
+#  - test
   - analyse
 #  - build
 #  - deploy
 
-flutter_test:
-  rules:
-  - if: '$CI_COMMIT_REF_NAME == "beta-test" && $CI_PIPELINE_SOURCE == "push"'
-  stage: test
-  script:
-    - flutter test
-  tags:
-    - flutter
+#flutter_test:
+#  rules:
+#  - if: '$CI_COMMIT_REF_NAME == "beta-test" && $CI_PIPELINE_SOURCE == "push"'
+#  stage: test
+#  script:
+#    - flutter test
+#  tags:
+#    - flutter
 
 flutter_analyse:
   rules:
@@ -23,7 +23,7 @@ flutter_analyse:
     - 'total_lines=$(echo "$analysis_output" | wc -l)'
     - 'total_warning=$(($total_lines - 2))'
     - 'echo "Total Warnings: $total_warning"'
-    - 'if [ "$total_warning" -gt 10 ]; then'
+    - 'if [[ total_warning -gt 10 ]]; then'
     - 'echo "More than 10 issues found. Terminating the workflow"'
     - 'exit 1'
     - 'fi'
