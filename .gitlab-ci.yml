@@ -1,8 +1,8 @@
 stages:
   - test
-#  - analyse
-  - build
-  - deploy
+  - analyse
+#  - build
+#  - deploy
 
 flutter_test:
   rules:
@@ -13,48 +13,52 @@ flutter_test:
   tags:
     - flutter
 
-#flutter_analyse:
+flutter_analyse:
+  rules:
+  - if: '$CI_COMMIT_REF_NAME == "beta-test" && $CI_PIPELINE_SOURCE == "push"'
+  stage: analyse
+  script:
+    - echo "Running flutter analyze..."
+    - analysis_output=$(flutter analyze)
+    - total_lines=$(echo "$analysis_output" | wc -l)
+    - total_warning=$(($total_lines - 2))
+    - echo "Total Warnings: $total_warning"
+    - if [ "$total_warning" -gt 10 ]; then
+      echo "More than 10 issues found. Terminating the workflow"
+      exit 1
+      fi
+
+  tags:
+    - flutter
+
+
+#flutter_build_android:
 #  rules:
-#  - if: '$CI_COMMIT_REF_NAME == "beta-test" && $CI_PIPELINE_SOURCE == "push"'
-#  stage: analyse
+#    - if: '$CI_COMMIT_REF_NAME == "beta-test" && $CI_PIPELINE_SOURCE == "push"'
+#  stage: build
+#  before_script:
+#    - flutter packages get
+#    - flutter clean
 #  script:
-#    - analysis_output=$(flutter analyze)
-#      $report_lines = ($analysis_output | Select-String -Pattern '(\d+) issues found').Matches.Groups[1].Value
-#      if [[ $report_lines -gt 10 ]]; then
-#          echo "more then 10 issues found"
-#          exit 1
-#      fi
+#     - flutter build apk
+#  artifacts:
+#    paths:
+#      - build\app\outputs\flutter-apk\app-release.apk
 #  tags:
 #    - flutter
-
-
-flutter_build_android:
-  rules:
-    - if: '$CI_COMMIT_REF_NAME == "beta-test" && $CI_PIPELINE_SOURCE == "push"'
-  stage: build
-  before_script:
-    - flutter packages get
-    - flutter clean
-  script:
-     - flutter build apk
-  artifacts:
-    paths:
-      - build\app\outputs\flutter-apk\app-release.apk
-  tags:
-    - flutter
-
-deploy_google_android:
-  rules:
-    - if: '$CI_COMMIT_REF_NAME == "beta-test" && $CI_PIPELINE_SOURCE == "push"'
-  stage: deploy
-
-  dependencies:
-    - flutter_build_android
-  script:
-    - cd android
-    - touch fastlane/drive_key.json
-    - echo "$DRIVE_SECRET_VARIABLE" > fastlane/drive_key.json
-    - fastlane deploy_google_drive --verbose
-  tags:
-    - flutter
+#
+#deploy_google_android:
+#  rules:
+#    - if: '$CI_COMMIT_REF_NAME == "beta-test" && $CI_PIPELINE_SOURCE == "push"'
+#  stage: deploy
+#
+#  dependencies:
+#    - flutter_build_android
+#  script:
+#    - cd android
+#    - touch fastlane/drive_key.json
+#    - echo "$DRIVE_SECRET_VARIABLE" > fastlane/drive_key.json
+#    - fastlane deploy_google_drive --verbose
+#  tags:
+#    - flutter
 
