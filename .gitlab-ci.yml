@@ -47,13 +47,12 @@ deploy_google_android:
   rules:
     - if: '$CI_COMMIT_REF_NAME == "beta-test" && $CI_PIPELINE_SOURCE == "push"'
   stage: deploy
-  before_script:
-    - cd android
   dependencies:
     - flutter_build_android
   script:
-    - touch android/fastlane/drive_key.json
-    - echo "$DRIVE_SECRET_VARIABLE" > android/fastlane/drive_key.json
+    - cd android
+    - touch fastlane/drive_key.json
+    - echo "$DRIVE_SECRET_VARIABLE" > fastlane/drive_key.json
     - fastlane deploy_google_drive
   tags:
     - flutter
