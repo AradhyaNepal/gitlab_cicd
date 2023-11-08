@@ -22,7 +22,7 @@ platform :android do
       drive_keyfile: './fastlane/drive_key.json',
       service_account: true,
       folder_id: '1Znd2NttLhNfVeKTw04vQp4D-f_SUEIeZ',
-      upload_files: ['../build\app\outputs\flutter-apk\app-release.apk']
+      upload_files: ['..\build\app\outputs\flutter-apk\app-release.apk']
     )
   end
 end
